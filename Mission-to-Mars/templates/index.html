@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission To Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p>The closest you will ever get to Mars, unless you're Elon Musk.</p>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape up-to-date Data!</a></p>
+    </div>
+    {% if mars_data %}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <h1>Latest Mars News</h1>
+            <!-- tried getting info by querying into the one dict inside mars_data -->
+            <p>{{ mars_data.news_title }}</p>
+            <!-- also tried just querying into master_dict (was doubtful here, since nothing is saved in the app as master_dict) -->
+            <p>{{ mars_data.news_p }}</p>
+            <div class="col-md-8">
+              <div class="page-header">
+                <h1>
+                  Featured Mars Image
+                </h1>
+              </div>
+              <img class="image" alt="Featured Mars Image" src="{{ mars_data.featured_image_url }}" />
+            </div>
+            <div class="col-md-4">
+              <dl>
+                <dt>
+                  Current Weather on Mars
+                </dt>
+                <dd>
+                    {{ mars_data.mars_weather | safe}}
+                </dd>
+              </dl>
+              <dl>
+                <dt>
+                  Mars Facts
+                </dt>
+                <dd class="table">
+                  {{ mars_data.mars_facts }}
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {% endif %}
+  </div>
+</body>
+
+</html>

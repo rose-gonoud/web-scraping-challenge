@@ -20,7 +20,7 @@ def scrape():
     browser = Browser('chrome', **executable_path, headless=False)
 
 
-    # go to the Jet Propulsion lab page
+    # go to the Jet Propulsion Lab page
     url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(url)
     browser.links.find_by_partial_text('FULL').click()
@@ -113,6 +113,7 @@ def scrape():
 
     # write all scraping results to one master dictionary
     master_dict = {
+    "collection_timestamp":time.time(),    
     "news_title":news_title,
     "news_p":news_p,
     "featured_image_url":featured_image_url,
