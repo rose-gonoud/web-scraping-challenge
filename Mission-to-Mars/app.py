@@ -13,7 +13,9 @@ mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_db")
 @app.route("/")
 def home():
 
-    # Find one record of data from the mongo database, making sure it's the latest that was tossed in
+    # Find one record of data from the mongo database
+    # our timestamp master_dict entry allows us to store all results of scraping and pull the newest
+    # sort is being used to order the timestamps in descending order, so the latest (highest) time is first in the list
     mars_master_info = mongo.db.mars_master_info.find_one(sort=[("collection_timestamp", -1)])
 
     # Return template and data

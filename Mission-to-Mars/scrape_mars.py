@@ -36,13 +36,30 @@ def scrape():
 
 
     # go to the NASA twitter page
+    # Comments in bottom of this block from a selenium solution for filtering weather-only tweets and selecting one:
+    # I was told my selector was invalid or illegal, I'm guessing the second one. Might have worked otherwise.
+    # Source:
+    # (https://medium.com/analytics-vidhya/create-your-own-twitter-dataset-with-this-simple-python-scraper-710bf7c5dc04)
+
+    # browser=webdriver.Chrome()
     twitter_url="https://twitter.com/marswxreport?lang=en"
     browser.visit(twitter_url)
     time.sleep(4)
     html = browser.html
     soup4 = bs(html, 'html.parser')
-    # get most recent mars weather post
+    # retrieval of generic tag
     mars_weather = soup4.find('article').text.strip()
+    # mars_weather=[]
+    # for result in browser.find_elements_by_class_name("^css-1dbjc4n"):
+    #       try:
+    #         text = browser.find_by_partial_text("InSight sol")
+        
+    #           if text:
+    #             mars_weather.append(text)
+            
+    #         else: print("if nope!")
+            
+    #     except: print("try nope!")
 
 
     # go to the space-facts site

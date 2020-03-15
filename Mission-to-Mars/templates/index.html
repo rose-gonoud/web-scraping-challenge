@@ -7,55 +7,94 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mission To Mars</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <!-- my additional style sheet stored in a static directory -->
+  <link rel="stylesheet" href="static/styles.css">
 </head>
 
 <body>
+  <!-- header jumbotron -->
   <div class="container-fluid">
     <div class="jumbotron text-center">
-      <h1>Mission to Mars</h1>
-      <p>The closest you will ever get to Mars, unless you're Elon Musk.</p>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape up-to-date Data!</a></p>
+      <h1 class="opaque">Mission to Mars</h1>
+      <p class="opaque">The closest you will ever get to Mars, unless you're Elon Musk.</p>
+      <!-- button that runs the scrape route from app.py -->
+      <p class="opaque"><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape up-to-date Data!</a></p>
     </div>
+    <!-- retrieves mars_data, the newest entry in the mars_master_info collection (see app.py for sorting args) -->
     {% if mars_data %}
       <div class="row">
         <div class="col-md-12">
           <div class="row">
-            <h1>Latest Mars News</h1>
-            <!-- tried getting info by querying into the one dict inside mars_data -->
-            <p>{{ mars_data.news_title }}</p>
-            <!-- also tried just querying into master_dict (was doubtful here, since nothing is saved in the app as master_dict) -->
-            <p>{{ mars_data.news_p }}</p>
+            <h1 class="first_blurb"> Latest Mars News </h1>
+            <p class="first_blurb">{{ mars_data.news_title }}</p>
+            <p class="first_blurb">{{ mars_data.news_p }}</p>
             <div class="col-md-8">
               <div class="page-header">
                 <h1>
                   Featured Mars Image
                 </h1>
               </div>
-              <img class="image" alt="Featured Mars Image" src="{{ mars_data.featured_image_url }}" />
+              <img class="feat_image" alt="Featured Mars Image" src="{{ mars_data.featured_image_url }}" />
             </div>
             <div class="col-md-4">
               <dl>
-                <dt>
-                  Current Weather on Mars
+                <dt class="weather">
+                  Current Weather on Mars<hr/>
                 </dt>
                 <dd>
                     {{ mars_data.mars_weather | safe}}
                 </dd>
               </dl>
               <dl>
-                <dt>
-                  Mars Facts
+                <dt class="facts">
+                  Mars Facts<hr/>
                 </dt>
                 <dd class="table">
-                  {{ mars_data.mars_facts }}
+                  <!-- this table div breaks the dictionary entry containing the Mars Facts table into its keys and values-->
+                  <!-- allowing them to be placed into html's table tags -->
+                  <table>
+                    {% for key, value in mars_data.mars_facts.items() %}
+                       <tr>
+                            <th> {{ key }} </th>
+                            <td> {{ value }} </td>
+                       </tr>
+                    {% endfor %}
+                  </table>
                 </dd>
               </dl>
             </div>
           </div>
         </div>
-      </div>
-
+        <h1 class="grid_header">Mars Hemispheres<hr/></h1>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <img alt="Cerberus" src="{{ mars_data.hemisphere_info[0].img_url }}" />
+              <h3 class="caption">
+                {{ mars_data.hemisphere_info[0].title }}
+              </h3>
+            </div>
+            <div class="col-md-6">
+              <img alt="Schiaparelli" src="{{ mars_data.hemisphere_info[1].img_url }}" />
+              <h3 class="caption">
+                {{ mars_data.hemisphere_info[1].title }}
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <img alt="Syrtis Major" src="{{ mars_data.hemisphere_info[2].img_url }}" />
+              <h3 class="caption">
+                {{ mars_data.hemisphere_info[2].title }}
+              </h3>
+            </div>
+            <div class="col-md-6">
+              <img alt="Valles Marineris" src="{{ mars_data.hemisphere_info[3].img_url }}" />
+              <h3 class="caption">
+                {{ mars_data.hemisphere_info[3].title }}
+              </h3>
+            </div>
+        </div>
     {% endif %}
   </div>
 </body>

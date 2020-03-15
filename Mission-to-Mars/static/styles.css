@@ -1,0 +1,38 @@
+img {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.feat_image {
+    height: 94%;
+    width: 94%;
+    margin-bottom: 20px;
+}
+
+.first_blurb {
+    margin-left: 18px;
+}
+
+.weather {
+    margin-top: 40px;
+}
+
+.facts {
+    margin-top: 40px;
+}
+
+.grid_header {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.caption {
+    text-align: center;
+    font-size: large;
+    margin-bottom: 20px;
+    margin-top: -10px;
+    border-bottom: black;
+    border-radius: 3px;
+    border: 1px dashed black;
+}
